@@ -99,7 +99,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        String r = nombre + " "+apellido + " " + genero + " " + edad + " " + vocacion;
+        String r = nombre + " "+apellido +" vive en "+ nacionalidad +" " + genero + " " + edad + " " + vocacion;
         if(titulo==true){
             r += " tiene título ";
         } else if(titulo==false){

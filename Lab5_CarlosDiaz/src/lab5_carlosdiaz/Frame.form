@@ -384,6 +384,22 @@
     </Container>
     <Component class="javax.swing.ButtonGroup" name="covid">
     </Component>
+    <Container class="javax.swing.JPopupMenu" name="popup_paises">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="mi_agregar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Agregar persona"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mi_agregarActionPerformed"/>
+          </Events>
+        </MenuItem>
+      </SubComponents>
+    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -505,6 +521,9 @@
               <TreeModel code="Paises"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="t_paisesMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

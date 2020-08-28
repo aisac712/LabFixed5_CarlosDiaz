@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JColorChooser;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
@@ -72,6 +73,8 @@ public class Frame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jcalendar = new com.toedter.calendar.JCalendar();
         covid = new javax.swing.ButtonGroup();
+        popup_paises = new javax.swing.JPopupMenu();
+        mi_agregar = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_paises = new javax.swing.JTree();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -325,10 +328,23 @@ public class Frame extends javax.swing.JFrame {
                 .addContainerGap(163, Short.MAX_VALUE))
         );
 
+        mi_agregar.setText("Agregar persona");
+        mi_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_agregarActionPerformed(evt);
+            }
+        });
+        popup_paises.add(mi_agregar);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Paises");
         t_paises.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        t_paises.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                t_paisesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(t_paises);
 
         l_hombres.setModel(new DefaultListModel());
@@ -558,6 +574,35 @@ public class Frame extends javax.swing.JFrame {
         Date fFundacion = jcalendar.getDate();
         String nHimno = tf_himno.getText();
         Color color = b_color.getBackground();
+            
+        //AÑADO AL TREE DE PERSONAS
+        DefaultTreeModel tModel = (DefaultTreeModel) t_paises.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) tModel.getRoot();
+        int flag=0;                         //indica q pedos si ya existe el pais o sino para crearlo
+        for (int i = 0; i < root.getChildCount(); i++) {
+            if (root.getChildAt(i).toString().equals(nombre)) {                     //si ya existe esa nacionalidad
+                JOptionPane.showMessageDialog(this, "Error: ya existe ese país");   //tirarle advertencia
+                flag=1;
+            }
+        }
+        
+        if(flag==0){                                                                //sino, tons crearlo normal
+            DefaultMutableTreeNode pais = new DefaultMutableTreeNode(nombre);
+                root.add(pais);
+
+                DefaultMutableTreeNode h = new DefaultMutableTreeNode("Hombres");
+                DefaultMutableTreeNode m = new DefaultMutableTreeNode("Mujeres");
+                pais.add(h);
+                pais.add(m);
+                tModel.reload();
+                
+        //AÑADO AL JLIST
+        DefaultListModel modelo = (DefaultListModel) l_paises.getModel();
+        modelo.addElement(new Pais(nombre, fFundacion, nHimno, color));
+        l_paises.setModel(modelo);
+        }
+        tf_nombrePais.setText(""); jcalendar.setDate(new Date()); tf_himno.setText(""); b_color.setBackground(Color.red);
+        jd_pais.setVisible(false);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -575,6 +620,31 @@ public class Frame extends javax.swing.JFrame {
         jd_pais.setLocationRelativeTo(this);        
         jd_pais.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void t_paisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_paisesMouseClicked
+        // CLICK DERECHO SOBRE EL TREE
+        if (evt.isMetaDown()) {
+            int row = t_paises.getClosestRowForLocation(evt.getX(), evt.getY());
+            t_paises.setSelectionRow(row);
+
+            Object node = t_paises.getSelectionPath().getLastPathComponent();
+            nodo_seleccionado = (DefaultMutableTreeNode) node;
+            if (nodo_seleccionado.getUserObject() instanceof Pais) {
+                System.out.println("es un pais");
+                pais_seleccionado = (Pais) nodo_seleccionado.getUserObject();
+                popup_paises.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
+        
+    }//GEN-LAST:event_t_paisesMouseClicked
+
+    private void mi_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_agregarActionPerformed
+        // AÑADIR CON EL POPUP
+        jd_persona.setModal(true);        
+        jd_persona.pack();
+        jd_persona.setLocationRelativeTo(this);        
+        jd_persona.setVisible(true);
+    }//GEN-LAST:event_mi_agregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -648,6 +718,8 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JList<String> l_hombres;
     private javax.swing.JList<String> l_mujeres;
     private javax.swing.JList<String> l_paises;
+    private javax.swing.JMenuItem mi_agregar;
+    private javax.swing.JPopupMenu popup_paises;
     private javax.swing.JRadioButton rb_h;
     private javax.swing.JRadioButton rb_m;
     private javax.swing.JRadioButton rb_noC;
@@ -665,4 +737,8 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JTextField tf_vocacion;
     private javax.swing.ButtonGroup titulo;
     // End of variables declaration//GEN-END:variables
+
+    DefaultMutableTreeNode nodo_seleccionado;
+    Pais pais_seleccionado;
+    Persona persona_seleccionada;
 }

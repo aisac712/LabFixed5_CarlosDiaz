@@ -59,5 +59,10 @@ public class Pais {
     public void setColor(Color color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return nombre + " fundado en" + fFundacion + " " + nHimno + " bandera color" + color;
+    }
     
 }
