@@ -7,7 +7,11 @@ package lab5_carlosdiaz;
 
 import java.awt.Color;
 import java.util.Date;
+import javax.swing.DefaultListModel;
 import javax.swing.JColorChooser;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 
 /**
  *
@@ -40,7 +44,6 @@ public class Frame extends javax.swing.JFrame {
         rb_h = new javax.swing.JRadioButton();
         rb_m = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
-        ftf_edad = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         tf_vocacion = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -53,6 +56,7 @@ public class Frame extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         tf_nacionalidad = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        sp_edad = new javax.swing.JSpinner();
         genero = new javax.swing.ButtonGroup();
         jLabel9 = new javax.swing.JLabel();
         titulo = new javax.swing.ButtonGroup();
@@ -62,16 +66,14 @@ public class Frame extends javax.swing.JFrame {
         tf_nombrePais = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        tf_apellido1 = new javax.swing.JTextField();
+        tf_himno = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         b_color = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jcalendar = new com.toedter.calendar.JCalendar();
         covid = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTree2 = new javax.swing.JTree();
+        t_paises = new javax.swing.JTree();
         jScrollPane3 = new javax.swing.JScrollPane();
         l_hombres = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
@@ -83,6 +85,8 @@ public class Frame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        t_paises2 = new javax.swing.JTree();
 
         jLabel4.setText("Nombre");
 
@@ -170,8 +174,8 @@ public class Frame extends javax.swing.JFrame {
                                             .addComponent(jLabel5))
                                         .addGap(38, 38, 38)
                                         .addGroup(jd_personaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(ftf_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tf_nacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(tf_nacionalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(sp_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(64, 64, 64)
                         .addGroup(jd_personaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jd_personaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,9 +222,9 @@ public class Frame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jd_personaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(ftf_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(tf_vocacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_vocacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sp_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(85, 85, 85)
                 .addGroup(jd_personaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -231,7 +235,7 @@ public class Frame extends javax.swing.JFrame {
                     .addComponent(rb_noT))
                 .addGap(84, 84, 84)
                 .addComponent(jButton3)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         jLabel9.setText("jLabel9");
@@ -286,13 +290,13 @@ public class Frame extends javax.swing.JFrame {
                                     .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(35, 35, 35)
                                 .addGroup(jd_paisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_apellido1)
+                                    .addComponent(tf_himno)
                                     .addComponent(b_color, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jd_paisLayout.createSequentialGroup()
                         .addComponent(jLabel19)
                         .addGap(27, 27, 27)
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(217, 217, 217))))
         );
         jd_paisLayout.setVerticalGroup(
@@ -307,11 +311,11 @@ public class Frame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jd_paisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
-                    .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jd_paisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(tf_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_himno, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jd_paisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel23)
@@ -323,25 +327,42 @@ public class Frame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(jTree1);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Paises");
+        t_paises.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(t_paises);
 
-        jScrollPane2.setViewportView(jTree2);
-
+        l_hombres.setModel(new DefaultListModel());
         jScrollPane3.setViewportView(l_hombres);
 
         jLabel1.setText("Hombres");
 
+        l_mujeres.setModel(new DefaultListModel());
         jScrollPane4.setViewportView(l_mujeres);
 
         jLabel2.setText("Mujeres");
 
+        l_paises.setModel(new DefaultListModel());
         jScrollPane5.setViewportView(l_paises);
 
         jLabel3.setText("Países");
 
         jButton1.setText("Crear persona");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Crear país");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        t_paises2.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane6.setViewportView(t_paises2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -366,19 +387,20 @@ public class Frame extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(jLabel3))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3)))
                 .addGap(138, 138, 138))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(262, 262, 262)
-                        .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
                 .addGap(183, 183, 183))
         );
         layout.setVerticalGroup(
@@ -404,10 +426,9 @@ public class Frame extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -429,7 +450,7 @@ public class Frame extends javax.swing.JFrame {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         //AÑADIR PERSONA
-        String nacionalidad;
+        String nacionalidad = tf_nacionalidad.getText();
         String nombre = tf_nombre.getText();
         String apellido = tf_apellido.getText();
         String genero;
@@ -438,7 +459,7 @@ public class Frame extends javax.swing.JFrame {
         } else{
             genero = "Hombre";
         }
-        int edad = Integer.parseInt(ftf_edad.getText());
+        int edad = (Integer) sp_edad.getValue();
         String vocacion = tf_vocacion.getText();
         boolean titulo;
         if(rb_siT.isSelected()){
@@ -452,15 +473,108 @@ public class Frame extends javax.swing.JFrame {
         } else{
             covid = false;
         }
+        
+        //AÑADO LA PERSONA A LA LISTA
+        if(genero.equals("Hombre")){
+            DefaultListModel modelo
+                = (DefaultListModel) l_hombres.getModel();
+            modelo.addElement(new Persona(nacionalidad, nombre, apellido, genero, edad, vocacion, titulo, covid));
+            l_hombres.setModel(modelo);
+            
+        } else if(genero.equals("Mujer")){
+            DefaultListModel modelo
+                = (DefaultListModel) l_mujeres.getModel();
+            modelo.addElement(new Persona(nacionalidad, nombre, apellido, genero, edad, vocacion, titulo, covid));
+            l_mujeres.setModel(modelo);
+            
+        }
+        tf_nacionalidad.setText(""); tf_nombre.setText(""); tf_apellido.setText(""); rb_h.setSelected(true); sp_edad.setValue(0);
+        tf_vocacion.setText(""); rb_siT.setSelected(true); rb_siC.setSelected(true);
+        
+        //CREO O AÑADO A LA PERSONA AL PAíS
+        
+        DefaultTreeModel tModel = (DefaultTreeModel) t_paises.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) tModel.getRoot();
+        
+        int flag = 0;
+        for (int i = 0; i < root.getChildCount(); i++) {
+            if (root.getChildAt(i).toString().equals(nacionalidad)) {       //BUSCA SI YA EXISTE UNA NACIONALIDAD COMO LA DE ESTE WEY
+                /*DefaultMutableTreeNode p = new DefaultMutableTreeNode(new Persona(nombre,edad, nacionalidad));
+                ((DefaultMutableTreeNode) root.getChildAt(i)).add(p);*/
+                System.out.println("entraste donde ya habia");
+                if(root.getChildAt(i).getChildAt(0).toString().equals("Hombres")){      //si ya están creadas estas carpetas, tons solo añadime al maje nuevo
+                    if(genero.equals("Hombre")){
+                        ((DefaultMutableTreeNode) root.getChildAt(i).getChildAt(0)).add     //hombres
+                    (new DefaultMutableTreeNode(new Persona(nacionalidad, nombre, apellido, genero, edad, vocacion, titulo, covid)));
+                    } else if(genero.equals("Mujer")){
+                        ((DefaultMutableTreeNode) root.getChildAt(i).getChildAt(1)).add     //mujeres
+                    (new DefaultMutableTreeNode(new Persona(nacionalidad, nombre, apellido, genero, edad, vocacion, titulo, covid)));
+                    }
+                    
+                } else{
+                    DefaultMutableTreeNode h = new DefaultMutableTreeNode("Hombres");
+                    DefaultMutableTreeNode m = new DefaultMutableTreeNode("Mujeres");
+                    //DefaultMutableTreeNode pais = new DefaultMutableTreeNode(nacionalidad);
+                    ((DefaultMutableTreeNode) root.getChildAt(i)).add(h);
+                    ((DefaultMutableTreeNode) root.getChildAt(i)).add(h);
+
+
+
+                    if(genero.equals("Hombre")){
+                        h.add(new DefaultMutableTreeNode(new Persona(nacionalidad, nombre, apellido, genero, edad, vocacion, titulo, covid)));
+                    } else if(genero.equals("Mujer")){
+                        m.add(new DefaultMutableTreeNode(new Persona(nacionalidad, nombre, apellido, genero, edad, vocacion, titulo, covid)));
+                    }
+                }
+                
+                flag = 1;
+            } //fin if
+        } //fin for  
+        
+        if(flag==0){
+            DefaultMutableTreeNode pais = new DefaultMutableTreeNode(nacionalidad);
+            root.add(pais);
+
+            DefaultMutableTreeNode h = new DefaultMutableTreeNode("Hombres");
+            DefaultMutableTreeNode m = new DefaultMutableTreeNode("Mujeres");
+            pais.add(h);
+            pais.add(m);
+
+            if(genero.equals("Hombre")){
+                h.add(new DefaultMutableTreeNode(new Persona(nacionalidad, nombre, apellido, genero, edad, vocacion, titulo, covid)));
+            } else if(genero.equals("Mujer")){
+                m.add(new DefaultMutableTreeNode(new Persona(nacionalidad, nombre, apellido, genero, edad, vocacion, titulo, covid)));
+            }
+        }
+        
+        
+        tModel.reload();
+        jd_persona.setVisible(false);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // AÑADIR PAíS
         String nombre = tf_nombrePais.getText();
-        Date fFundacion = ;
-        String nHimno;
-        Color color;
+        Date fFundacion = jcalendar.getDate();
+        String nHimno = tf_himno.getText();
+        Color color = b_color.getBackground();
     }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // DESPLEGAR MENU DE CREAR PERSONA 
+        jd_persona.setModal(true);        
+        jd_persona.pack();
+        jd_persona.setLocationRelativeTo(this);        
+        jd_persona.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // DESPLEGAR MENU DE CREAR PAIS
+        jd_pais.setModal(true);        
+        jd_pais.pack();
+        jd_pais.setLocationRelativeTo(this);        
+        jd_pais.setVisible(true);
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -473,7 +587,7 @@ public class Frame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -500,13 +614,11 @@ public class Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_color;
     private javax.swing.ButtonGroup covid;
-    private javax.swing.JFormattedTextField ftf_edad;
     private javax.swing.ButtonGroup genero;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -526,12 +638,11 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTree jTree1;
-    private javax.swing.JTree jTree2;
+    private javax.swing.JScrollPane jScrollPane6;
+    private com.toedter.calendar.JCalendar jcalendar;
     private javax.swing.JDialog jd_pais;
     private javax.swing.JDialog jd_persona;
     private javax.swing.JList<String> l_hombres;
@@ -543,8 +654,11 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JRadioButton rb_noT;
     private javax.swing.JRadioButton rb_siC;
     private javax.swing.JRadioButton rb_siT;
+    private javax.swing.JSpinner sp_edad;
+    private javax.swing.JTree t_paises;
+    private javax.swing.JTree t_paises2;
     private javax.swing.JTextField tf_apellido;
-    private javax.swing.JTextField tf_apellido1;
+    private javax.swing.JTextField tf_himno;
     private javax.swing.JTextField tf_nacionalidad;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JTextField tf_nombrePais;

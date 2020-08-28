@@ -96,5 +96,21 @@ public class Persona {
     public void setCovid(boolean covid) {
         this.covid = covid;
     }
+
+    @Override
+    public String toString() {
+        String r = nombre + " "+apellido + " " + genero + " " + edad + " " + vocacion;
+        if(titulo==true){
+            r += " tiene título ";
+        } else if(titulo==false){
+            r += " no tiene título ";
+        }
+        if(covid==true){
+            r += "está infectado";
+        } else if(covid==false){
+            r += "no está infectado";
+        }
+        return r;
+    }
     
 }
