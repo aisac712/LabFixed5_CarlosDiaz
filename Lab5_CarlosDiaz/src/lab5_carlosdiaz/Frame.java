@@ -75,6 +75,8 @@ public class Frame extends javax.swing.JFrame {
         covid = new javax.swing.ButtonGroup();
         popup_paises = new javax.swing.JPopupMenu();
         mi_agregar = new javax.swing.JMenuItem();
+        mi_modificarP = new javax.swing.JMenuItem();
+        mi_eliminarP = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_paises = new javax.swing.JTree();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -336,6 +338,18 @@ public class Frame extends javax.swing.JFrame {
         });
         popup_paises.add(mi_agregar);
 
+        mi_modificarP.setText("Modificar");
+        mi_modificarP.setActionCommand("mi_modificarP");
+        mi_modificarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mi_modificarPActionPerformed(evt);
+            }
+        });
+        popup_paises.add(mi_modificarP);
+
+        mi_eliminarP.setText("Eliminar");
+        popup_paises.add(mi_eliminarP);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Paises");
@@ -466,7 +480,10 @@ public class Frame extends javax.swing.JFrame {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         //AÑADIR PERSONA
-        String nacionalidad = tf_nacionalidad.getText();
+        if(bloquearNacionalidad==true){
+            tf_nacionalidad.setText(nombre_paisBloquear);       
+        }
+        String nacionalidad = tf_nacionalidad.getText();        //no importa pq se sobreescribiría
         String nombre = tf_nombre.getText();
         String apellido = tf_apellido.getText();
         String genero;
@@ -509,12 +526,13 @@ public class Frame extends javax.swing.JFrame {
         
         //CREO O AÑADO A LA PERSONA AL PAíS
         
+        
         DefaultTreeModel tModel = (DefaultTreeModel) t_paises.getModel();
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) tModel.getRoot();
         
         int flag = 0;
         for (int i = 0; i < root.getChildCount(); i++) {
-            if (root.getChildAt(i).toString().equals(nacionalidad)) {       //BUSCA SI YA EXISTE UNA NACIONALIDAD COMO LA DE ESTE WEY
+            if (((Pais) root.getChildAt(i)).getNombre().equals(nacionalidad)) {       //BUSCA SI YA EXISTE UNA NACIONALIDAD COMO LA DE ESTE WEY
                 /*DefaultMutableTreeNode p = new DefaultMutableTreeNode(new Persona(nombre,edad, nacionalidad));
                 ((DefaultMutableTreeNode) root.getChildAt(i)).add(p);*/
                 System.out.println("entraste donde ya habia");
@@ -548,7 +566,7 @@ public class Frame extends javax.swing.JFrame {
         } //fin for  
         
         if(flag==0){
-            DefaultMutableTreeNode pais = new DefaultMutableTreeNode(nacionalidad);
+            DefaultMutableTreeNode pais = new DefaultMutableTreeNode(new Pais(nacionalidad, null, null, null));
             root.add(pais);
 
             DefaultMutableTreeNode h = new DefaultMutableTreeNode("Hombres");
@@ -587,7 +605,7 @@ public class Frame extends javax.swing.JFrame {
         }
         
         if(flag==0){                                                                //sino, tons crearlo normal
-            DefaultMutableTreeNode pais = new DefaultMutableTreeNode(nombre);
+            DefaultMutableTreeNode pais = new DefaultMutableTreeNode(new Pais(nombre, fFundacion, nHimno, color));
                 root.add(pais);
 
                 DefaultMutableTreeNode h = new DefaultMutableTreeNode("Hombres");
@@ -629,10 +647,15 @@ public class Frame extends javax.swing.JFrame {
 
             Object node = t_paises.getSelectionPath().getLastPathComponent();
             nodo_seleccionado = (DefaultMutableTreeNode) node;
+            
             if (nodo_seleccionado.getUserObject() instanceof Pais) {
                 System.out.println("es un pais");
                 pais_seleccionado = (Pais) nodo_seleccionado.getUserObject();
+                        nombre_paisBloquear = pais_seleccionado.getNombre();
+                        System.out.println(nombre_paisBloquear);
                 popup_paises.show(evt.getComponent(), evt.getX(), evt.getY());
+            } else if(nodo_seleccionado.getUserObject() instanceof Persona){
+                
             }
         }
         
@@ -640,11 +663,23 @@ public class Frame extends javax.swing.JFrame {
 
     private void mi_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_agregarActionPerformed
         // AÑADIR CON EL POPUP
+        bloquearNacionalidad = true;
+        
         jd_persona.setModal(true);        
         jd_persona.pack();
         jd_persona.setLocationRelativeTo(this);        
         jd_persona.setVisible(true);
     }//GEN-LAST:event_mi_agregarActionPerformed
+
+    private void mi_modificarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_modificarPActionPerformed
+        // MODIFICAR EL FOKING PAIS
+        bloquearNombrePais = true;
+        
+        jd_pais.setModal(true);        
+        jd_pais.pack();
+        jd_pais.setLocationRelativeTo(this);        
+        jd_pais.setVisible(true);
+    }//GEN-LAST:event_mi_modificarPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -719,6 +754,8 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JList<String> l_mujeres;
     private javax.swing.JList<String> l_paises;
     private javax.swing.JMenuItem mi_agregar;
+    private javax.swing.JMenuItem mi_eliminarP;
+    private javax.swing.JMenuItem mi_modificarP;
     private javax.swing.JPopupMenu popup_paises;
     private javax.swing.JRadioButton rb_h;
     private javax.swing.JRadioButton rb_m;
@@ -741,4 +778,8 @@ public class Frame extends javax.swing.JFrame {
     DefaultMutableTreeNode nodo_seleccionado;
     Pais pais_seleccionado;
     Persona persona_seleccionada;
+    String nombre_paisBloquear;
+    boolean bloquearNacionalidad=false;     //para la hora de modificar
+    
+    boolean bloquearNombrePais = false;     //midiificar el nombre del pais en modificar pais
 }
