@@ -94,8 +94,10 @@ public class Frame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        t_paises2 = new javax.swing.JTree();
+        jButton5 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        t_infectados = new javax.swing.JTree();
 
         jLabel4.setText("Nombre");
 
@@ -418,9 +420,23 @@ public class Frame extends javax.swing.JFrame {
             }
         });
 
-        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        t_paises2.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane6.setViewportView(t_paises2);
+        jButton5.setText("--->");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Infectados");
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Infectados");
+        t_infectados.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        t_infectados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                t_infectadosMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(t_infectados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -448,18 +464,23 @@ public class Frame extends javax.swing.JFrame {
                         .addComponent(jLabel3)))
                 .addGap(138, 138, 138))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                .addGap(262, 262, 262)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addGap(183, 183, 183))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(0, 19, Short.MAX_VALUE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(177, 177, 177))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,9 +505,16 @@ public class Frame extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5)
+                        .addGap(145, 145, 145))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         pack();
@@ -761,6 +789,53 @@ public class Frame extends javax.swing.JFrame {
         jd_persona.setVisible(true);
     }//GEN-LAST:event_mi_modificarPeActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // INFECTADOS PASAN A JTREE
+        DefaultTreeModel tModel = (DefaultTreeModel) t_paises.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) tModel.getRoot();
+        /*System.out.println(root.getChildCount());
+        System.out.println(root.getChildAt(0).getChildAt(0).getChildCount());
+        System.out.println(root.getChildAt(0).getChildAt(1).getChildCount());*/
+        System.out.println("");
+        System.out.println("INFECTADOS:");
+        for (int i = 0; i < root.getChildCount(); i++) {
+            if(root.getChildAt(i).getChildCount()!=0){        //si el pais si tiene hijos
+
+                if(root.getChildAt(i).getChildAt(0).getChildCount()!=0){  //si hombres si tiene hijos
+                    for (int j = 0; j < root.getChildAt(i).getChildAt(0).getChildCount(); j++) {
+                        nodo_seleccionado = (DefaultMutableTreeNode) root.getChildAt(i).getChildAt(0).getChildAt(j);
+                        persona_seleccionada = (Persona) nodo_seleccionado.getUserObject();
+                        if(persona_seleccionada.isCovid()==true){
+                            System.out.println(persona_seleccionada);   //mirar consola para comprobar q estan buenos
+                            //AÑADO LA PERSONA AL JTREE DE INFECTADOS 
+                        }
+                    }
+                    
+                }
+                if(root.getChildAt(i).getChildAt(1).getChildCount()!=0){  //si mujeres si tiene hijos
+                    for (int j = 0; j < root.getChildAt(i).getChildAt(1).getChildCount(); j++) {
+                        nodo_seleccionado = (DefaultMutableTreeNode) root.getChildAt(i).getChildAt(1).getChildAt(j);
+                        persona_seleccionada = (Persona) nodo_seleccionado.getUserObject();
+                        if(persona_seleccionada.isCovid()==true){
+                            System.out.println(persona_seleccionada);   //mirar consola para comprobar q estan buenos
+                            //AÑADO LA PERSONA AL JTREE DE INFECTADOS
+                        }
+                    }
+                }
+                
+                
+            }
+            
+            
+        }
+        
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void t_infectadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_infectadosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_t_infectadosMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -804,11 +879,13 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -823,10 +900,10 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private com.toedter.calendar.JCalendar jcalendar;
     private javax.swing.JDialog jd_pais;
     private javax.swing.JDialog jd_persona;
@@ -848,8 +925,8 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JRadioButton rb_siC;
     private javax.swing.JRadioButton rb_siT;
     private javax.swing.JSpinner sp_edad;
+    private javax.swing.JTree t_infectados;
     private javax.swing.JTree t_paises;
-    private javax.swing.JTree t_paises2;
     private javax.swing.JTextField tf_apellido;
     private javax.swing.JTextField tf_himno;
     private javax.swing.JTextField tf_nacionalidad;
